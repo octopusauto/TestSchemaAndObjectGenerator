@@ -1,0 +1,135 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>TestSchemaGenerator</groupId>
+	<artifactId>TestSchemaGenerator</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>TestSchemaGenerator</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<!-- <dependency> <groupId>trang</groupId> <artifactId>trang</artifactId> 
+			<version>1.0</version> <scope>system</scope> <systemPath>/Users/pushpinderrattan/Downloads/trang-20091111/trang.jar</systemPath> 
+			</dependency> -->
+		<dependency>
+			<groupId>com.thaiopensource</groupId>
+			<artifactId>trang</artifactId>
+			<version>20091111</version>
+		</dependency>
+
+	</dependencies>
+
+
+
+	<profiles>
+		<profile>
+			<id>schema-generator</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>1.2.1</version>
+						<executions>
+							<execution>
+								<!-- <phase>test</phase> -->
+								<goals>
+									<goal>java</goal>
+								</goals> 
+								<configuration>
+									<executable>java</executable>
+									<mainClass>src.main.java.RunSchemaGen</mainClass>
+									<arguments>
+										<argument>data.xml</argument>
+										<argument>data.xsd</argument>
+									</arguments>
+									<!-- <mainClass>com.thaiopensource.relaxng.translate.Driver</mainClass> -->
+									<!-- <commandlineArgs>data.xml</commandlineArgs> <commandlineArgs>data.xsd</commandlineArgs> -->
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>assembly</id>
+			<build>
+				<plugins>
+					<!-- The following plugin is used to compile this project with all dependencies 
+						included. To compile the jar with all dependencies included, run with "assembly:assembly" 
+						as the goal. -->
+					<plugin>
+						<artifactId>maven-assembly-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>single</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+
+	<profile>
+		<id>objects-generate</id>
+		<build>
+			<plugins>
+				<plugin>
+					<groupId>org.jvnet.jaxb2.maven2</groupId>
+					<artifactId>maven-jaxb2-plugin</artifactId>
+					<version>0.7.1</version>
+					<executions>
+						<execution>
+							<id>TestData</id>
+							<goals>
+								<goal>generate</goal>
+							</goals>
+
+							<configuration>
+								<schemaDirectory>${basedir}/src/main/resources</schemaDirectory>
+								<forceRegenerate>true</forceRegenerate>
+								<extension>true</extension>
+								<plugins>
+									<plugin>
+										<groupId>org.jvnet.jaxb2_commons</groupId>
+										<artifactId>jaxb2-basics</artifactId>
+										<version>0.6.3</version>
+									</plugin>
+									<plugin>
+										<groupId>org.jvnet.jaxb2_commons</groupId>
+										<artifactId>jaxb2-value-constructor</artifactId>
+										<version>3.0</version>
+									</plugin>
+								</plugins>
+							</configuration>
+						</execution>
+
+					</executions>
+				</plugin>
+			</plugins>
+		</build>
+	</profile>
+
+</profiles>
+	
+
+
+</project>

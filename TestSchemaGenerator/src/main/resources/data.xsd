@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="data">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="test"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="test">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="username"/>
+        <xs:element ref="password"/>
+        <xs:sequence minOccurs="0">
+          <xs:element ref="empid"/>
+          <xs:element ref="empSpouseName"/>
+          <xs:element ref="empHeight"/>
+        </xs:sequence>
+        <xs:element minOccurs="0" ref="empfirsname"/>
+        <xs:element minOccurs="0" ref="emplastname"/>
+        <xs:element minOccurs="0" ref="empfirsnatme"/>
+      </xs:sequence>
+      <xs:attribute name="name" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="username" type="xs:NCName"/>
+  <xs:element name="password" type="xs:NCName"/>
+  <xs:element name="empid" type="xs:integer"/>
+  <xs:element name="empSpouseName" type="xs:NCName"/>
+  <xs:element name="empHeight" type="xs:integer"/>
+  <xs:element name="empfirsname" type="xs:NCName"/>
+  <xs:element name="emplastname" type="xs:NCName"/>
+  <xs:element name="empfirsnatme" type="xs:NCName"/>
+</xs:schema>
