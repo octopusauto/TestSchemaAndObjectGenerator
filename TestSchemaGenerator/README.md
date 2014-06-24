@@ -4,6 +4,8 @@ While using this project the end user has to provide Test data xmls which will b
 Using those xmls, corresponding test schema and objects will be generated.
 
 Sample Test Data xml provided by manual tester:
+
+
 <?xml version="1.0"?>
 <data>
 	<test name="test1">
